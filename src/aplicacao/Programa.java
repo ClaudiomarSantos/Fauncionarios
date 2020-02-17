@@ -1,10 +1,10 @@
 package aplicacao;
 
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import entidades.Funcionario;
 
@@ -34,20 +34,29 @@ public class Programa {
 			func = new Funcionario(id, nome, salario);
 			list.add(func);
 
-			for (int y = 0; y < n; y++) {
-				if (list.get(y).getId() == id) {
-					System.out.println("id igual não é permitido"); break;
-				} else {
-				}
-				
-				
-				
-				
-				
-				
-				
-			}
 		}
 
+		System.out.println("digite o id do funcionario para aumentar o salario: ");
+		int id2 = sc.nextInt();
+
+		Funcionario result = list.stream().filter(x -> x.getId() == id2).findFirst().orElse(null);
+
+		if (result == null) {
+			System.out.println("id Invalido: ");
+
+		} else {
+			System.out.println("digite o percentual de aumento: ");
+			double percentual = sc.nextInt();
+			result.AumSal(percentual);
+			System.out.println("dados dos clientes: ");
+
+			for (Funcionario x : list) {
+				System.out.println(x);
+
+			}
+
+		}
+
+		sc.close();
 	}
 }
